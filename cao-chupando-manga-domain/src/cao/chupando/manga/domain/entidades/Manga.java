@@ -9,10 +9,11 @@ package cao.chupando.manga.domain.entidades;
  *
  * @author gustavo
  */
-public class Editora {
+public class Manga {
     private int id;
     private String nome;
-    private String nacionalidade;
+    private String sinopse;
+    private boolean ativo;
 
     public int getId() {
         return id;
@@ -30,12 +31,20 @@ public class Editora {
         this.nome = nome;
     }
 
-    public String getNacionalidade() {
-        return nacionalidade;
+    public String getSinopse() {
+        return sinopse;
     }
 
-    public void setNacionalidade(String nacionalidade) {
-        this.nacionalidade = nacionalidade;
+    public void setSinopse(String sinopse) {
+        this.sinopse = sinopse;
+    }
+
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
     }
     
     
