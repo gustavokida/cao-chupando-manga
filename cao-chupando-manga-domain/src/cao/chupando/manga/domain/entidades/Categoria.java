@@ -29,6 +29,9 @@ public class Categoria {
         this.nome = nome;
     }
     
-    
+    public boolean equals(Object o){
+        Categoria aux = (Categoria) o;
+        return this.nome.equals(aux.nome);
+    }
     
 }
