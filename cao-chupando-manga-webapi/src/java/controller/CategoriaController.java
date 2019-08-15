@@ -8,6 +8,7 @@ package controller;
 import cao.chupando.manga.domain.dao.ICategoriaDAO;
 import cao.chupando.manga.domain.dao.list.CategoriaDAOImpl;
 import cao.chupando.manga.domain.entidades.Categoria;
+import java.util.List;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -27,8 +28,8 @@ public class CategoriaController {
     @GET
     @Path("/")
     @Produces(MediaType.APPLICATION_JSON)
-    public String index(){
-        return "\"teste\"";
+    public List<Categoria> index(){
+        return banco.consultar();
     }
  
     @GET
