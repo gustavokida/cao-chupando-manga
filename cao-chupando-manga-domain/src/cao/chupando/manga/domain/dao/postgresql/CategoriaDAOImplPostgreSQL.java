@@ -9,6 +9,8 @@ import cao.chupando.manga.domain.dao.ICategoriaDAO;
 import cao.chupando.manga.domain.entidades.Categoria;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,18 +47,48 @@ public class CategoriaDAOImplPostgreSQL
 
     @Override
     public void atualizar(Categoria ent) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Connection con = criaConexao();
+        String sql = "update categoria set " + "nome = ? where id = ?";
+        
+        try{
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, ent.getNome());
+            ps.setInt(2, ent.getId());
+            ps.execute();
+            ps.close();
+            con.close();
+        } catch(Exception erro){
+            erro.printStackTrace();
+        }
     }
 
     @Override
     public void remover(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Connection con = criaConexao();
+        String sql = "delete from categoria where id = "+ id;
+        
+        try{
+            con.createStatement().execute(sql);
+        } catch(Exception erro){
+            erro.printStackTrace();
+        }
     }
 
     @Override
     public List<Categoria> consultar() {
         try{
             List<Categoria> lista = new ArrayList<>();
+            String sql = "select * from categoria";
+            Connection con = criaConexao();
+            
+            ResultSet res = con.createStatement().executeQuery(sql);
+            
+            while(res.next()){
+                Categoria c = new Categoria();
+                c.setId(res.getInt("id"));
+                c.setNome(res.getString("nome"));
+                lista.add(c);
+            }
             
             return lista;
         }catch(Exception erro){
