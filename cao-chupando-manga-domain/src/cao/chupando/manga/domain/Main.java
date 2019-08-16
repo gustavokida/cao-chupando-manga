@@ -7,6 +7,7 @@ package cao.chupando.manga.domain;
 
 import cao.chupando.manga.domain.dao.ICategoriaDAO;
 import cao.chupando.manga.domain.dao.list.CategoriaDAOImpl;
+import cao.chupando.manga.domain.dao.postgresql.CategoriaDAOImplPostgreSQL;
 import cao.chupando.manga.domain.entidades.Categoria;
 import java.util.Scanner;
 
@@ -21,7 +22,7 @@ public class Main {
      */
     public static void main(String[] args) {
         
-        ICategoriaDAO banco = new CategoriaDAOImpl();
+        ICategoriaDAO banco = new CategoriaDAOImplPostgreSQL();
         Scanner t = new Scanner(System.in);
         int opcao = 0;
         do{

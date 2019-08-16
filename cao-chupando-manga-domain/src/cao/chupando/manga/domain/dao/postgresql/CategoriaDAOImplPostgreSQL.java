@@ -7,6 +7,8 @@ package cao.chupando.manga.domain.dao.postgresql;
 
 import cao.chupando.manga.domain.dao.ICategoriaDAO;
 import cao.chupando.manga.domain.entidades.Categoria;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,10 +18,29 @@ import java.util.List;
  */
 public class CategoriaDAOImplPostgreSQL 
         implements ICategoriaDAO {
+    
+    private Connection criaConexao(){
+        Connection conexao = null;
+        try{
+            Class.forName("org.postgresql.Driver");
+            conexao = DriverManager.getConnection("jdbc:postgresql://localhost:5432/manga", "postgres", "123");
+        } catch(Exception erro){
+                erro.printStackTrace();
+        }
+        return conexao;
+    }
 
     @Override
     public void inserir(Categoria ent) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Connection con = criaConexao();
+        
+        String sql = "insert into categoria (nome)" + "VALUES ('" + ent.getNome() + "')";
+        
+        try{
+        con.createStatement().execute(sql);
+        } catch (Exception erro) {
+            erro.printStackTrace();
+        }
     }
 
     @Override
